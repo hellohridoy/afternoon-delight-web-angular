@@ -1,0 +1,38 @@
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-end mb-2">
+  <button type="button" (click)="openUpdateMemberModal(member)" class="btn btn-primary btn-sm me-2 mb-3 ml-auto">Add Member</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-light">
+      <tr>
+        <th>PIN</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Official Phone Number</th>
+        <th>Designation</th>
+        <th>Departments</th>
+        <th>Unit</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let member of member">
+        <td>{{ member.pin }}</td>
+        <td>{{ member.name }}</td>
+        <td>{{ member.email }}</td>
+        <td>{{ member.officialPhoneNumber || 'N/A' }}</td>
+        <td>{{ member.designation }}</td>
+        <td>{{ member.departments }}</td>
+        <td>{{ member.unit }}</td>
+        <td>
+          <button type="button" (click)="openUpdateMemberModal(member)" class="btn btn-primary btn-sm me-2">Update</button>
+<!--          <button type="button" (click)="deleteMember(member.id)" class="">Delete</button>-->
+          <button class="details-button btn btn-info btn-sm" [routerLink]="['/member-details', member.id]">Details</button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
