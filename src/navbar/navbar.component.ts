@@ -24,15 +24,5 @@ export class NavbarComponent {
     this.rounter.navigate([path]);
   }
 
-  onSearch() {
-    const keyword = this.searchForm.get('keyword')?.value;
-    this.memberService.globalSearchWithPinEmailOfficialPhoneNumber(keyword).subscribe(
-      (results) => {
-        this.searchResults = results;
-      },
-      (error) => {
-        console.error('Error searching members:', error);
-      }
-    );
-  }
+
 }

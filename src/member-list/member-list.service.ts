@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Customer} from "./customer.model";
+import {environment} from "./member-list.component";
 
 
 @Injectable({
@@ -8,24 +10,33 @@ import { Observable } from 'rxjs';
 })
 
 export class MemberListService {
-
-
-  private baseUrlForMember = 'http://localhost:8080/afternoon-delights/member';
+  private apiUrl = '/api/customers';
 
   constructor(private http: HttpClient) { }
 
-
-
-  getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrlForMember}/all`);
+  // Download image
+  downloadImage(customerId: number): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/api/customers/${customerId}/image`, {
+      responseType: 'blob'
+    });
   }
 
-  deleteMember(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrlForMember}/delete/${id}`);
+  // Download CV
+  downloadCv(customerId: number): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/api/customers/${customerId}/cv`, {
+      responseType: 'blob'
+    });
   }
+// member-list.service.ts
 
-  updateMember(member: any):Observable<any>{
-    return this.http.put(`${this.baseUrlForMember}/${member.id}`, member)
+  getImage(customerId: number): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/download/image/${customerId}`, {
+      responseType: 'blob'
+    });
   }
-
+  // Updated service methods with typing
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`http://localhost:8080/api/customers/customer-infos`);
+  }
+  members: Customer[] = [];
 }

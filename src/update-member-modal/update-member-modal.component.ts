@@ -30,13 +30,7 @@ export class UpdateMemberModalComponent {
     });
   }
 
-  onSubmit() {
-    if (this.updateMemberForm.valid) {
-      this.memberService.updateMember(this.updateMemberForm.value).subscribe((response: any) => {
-        this.dialogRef.close(response);
-      });
-    }
-  }
+
 
   onCancel() {
     this.dialogRef.close();

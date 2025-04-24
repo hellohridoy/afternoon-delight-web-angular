@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {UserListComponent} from "../user-list/user-list.component";
 import {UserProfileComponent} from "../user-profile/user-profile.component";
 import {DashboardComponent} from "../dashboard/dashboard.component";
-import {AddMemberComponent} from "../add-member/add-member.component";
+import {CustomerFormComponent} from "../add-member/add-member.component";
 import {MemberListComponent} from "../member-list/member-list.component";
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'list', component: UserListComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'add-member', component: AddMemberComponent },
+  { path: 'add-member', component: CustomerFormComponent },
   { path: 'member-list', component: MemberListComponent },];
 
 @NgModule({

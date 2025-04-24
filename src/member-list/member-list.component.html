@@ -1,38 +1,63 @@
-<div class="container-fluid mt-4">
-  <div class="d-flex justify-content-end mb-2">
-  <button type="button" (click)="openUpdateMemberModal(member)" class="btn btn-primary btn-sm me-2 mb-3 ml-auto">Add Member</button>
+<!-- member-list.component.html -->
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Member List</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-light">
+
+  <div *ngIf="!isLoading && members.length === 0" class="alert alert-info">
+    No members found.
+  </div>
+
+  <div class="table-responsive" *ngIf="members.length > 0">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
       <tr>
-        <th>PIN</th>
-        <th>Name</th>
+        <th>Profile</th>
+        <th>Username</th>
         <th>Email</th>
-        <th>Official Phone Number</th>
-        <th>Designation</th>
-        <th>Departments</th>
-        <th>Unit</th>
-        <th>Actions</th>
+        <th>Phone</th>
+        <th>Country</th>
+        <th>CV</th>
+        <th>Created At</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let member of member">
-        <td>{{ member.pin }}</td>
-        <td>{{ member.name }}</td>
-        <td>{{ member.email }}</td>
-        <td>{{ member.officialPhoneNumber || 'N/A' }}</td>
-        <td>{{ member.designation }}</td>
-        <td>{{ member.departments }}</td>
-        <td>{{ member.unit }}</td>
+      <tr *ngFor="let member of members">
         <td>
-          <button type="button" (click)="openUpdateMemberModal(member)" class="btn btn-primary btn-sm me-2">Update</button>
-<!--          <button type="button" (click)="deleteMember(member.id)" class="">Delete</button>-->
-          <button class="details-button btn btn-info btn-sm" [routerLink]="['/member-details', member.id]">Details</button>
+          <a [href]="getImageDownloadUrl(member)" download="{{ member.imageName }}">
+            <img [src]="imagePreviews[member.id] || 'placeholder.jpg'"
+                 (error)="handleImageError($event)"
+                 alt="Profile image"
+                 (load)="loadImagePreview(member)">
+            <span class="text-muted" *ngIf="!member.imageName">No image</span>
+          </a>
         </td>
+        <td>{{ member.username }}</td>
+        <td>{{ member.email }}</td>
+        <td>{{ member.phone }}</td>
+        <td>{{ member.country }}</td>
+        <td>
+          <!-- Example download buttons in your table -->
+          <button (click)="downloadImage(member.id, member.imageName)">
+            Download Image
+          </button>
 
+          <button (click)="downloadCv(member.id, member.cvName)">
+            Download CV
+          </button>
+          <span class="text-muted" *ngIf="!member.cvName">No CV</span>
+        </td>
+        <td>{{ member.createdAt | date:'medium' }}</td>
       </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="text-center" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
 </div>

@@ -8,11 +8,11 @@ import { AppComponent } from './app.component';
 import {DashboardComponent} from "../dashboard/dashboard.component";
 import {UserProfileComponent} from "../user-profile/user-profile.component";
 import {NavbarComponent} from "../navbar/navbar.component";
-import {AddMemberComponent} from "../add-member/add-member.component";
 import {UserListComponent} from "../user-list/user-list.component";
 import {UpdateMemberModalComponent} from "../update-member-modal/update-member-modal.component";
 import {MemberListComponent} from "../member-list/member-list.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CustomerFormComponent} from "../add-member/add-member.component";
 
 
 
@@ -23,11 +23,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     UserProfileComponent,
     NavbarComponent,
     DashboardComponent,
-    AddMemberComponent,
     MemberListComponent,
     UpdateMemberModalComponent,
     UserListComponent,
     MemberListComponent,
+    CustomerFormComponent
   ],
   imports: [
     BrowserModule,
